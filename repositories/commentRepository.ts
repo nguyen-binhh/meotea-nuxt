@@ -4,8 +4,6 @@ const defaultMeta: PaginationMeta = { page: 1, limit: 10, total: 0, totalPages: 
 
 export interface CommentPayload {
   content: string
-  authorName?: string
-  authorEmail?: string
 }
 
 export function useCommentRepository() {
@@ -33,7 +31,7 @@ export function useCommentRepository() {
   }
 
   async function addComment(postId: number, body: CommentPayload): Promise<Comment | null> {
-    return apiPost<Comment>(`/posts/${postId}/comments`, body as Record<string, unknown>)
+    return apiPost<Comment>(`/posts/${postId}/comments`, body as unknown as Record<string, unknown>)
   }
 
   return { getComments, addComment }

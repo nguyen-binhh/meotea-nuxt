@@ -129,13 +129,11 @@ export interface Comment {
   id: number
   postId: number
   userId?: number | null
-  user?: { name: string; email: string; media?: string } | null
   authorName: string
-  authorEmail?: string | null
+  authorAvatar?: string | null
   content: string
   isActive: boolean
   createdAt: string
-  updatedAt: string
 }
 
 // ─── API Response ─────────────────────────────────────────────────

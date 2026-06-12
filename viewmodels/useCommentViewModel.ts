@@ -2,7 +2,6 @@ import type { Comment } from '~/types'
 
 export function usePostCommentViewModel(postId: ComputedRef<number | undefined>) {
   const repo = useCommentRepository()
-  const authStore = useAuthStore()
   const popup = usePopup()
   const { t } = useI18n()
 
@@ -18,34 +17,18 @@ export function usePostCommentViewModel(postId: ComputedRef<number | undefined>)
   const totalPages = computed(() => data.value?.meta?.totalPages ?? 1)
   const total = computed(() => data.value?.meta?.total ?? 0)
 
-  const form = reactive({
-    content: '',
-    authorName: '',
-    authorEmail: '',
-  })
+  const form = reactive({ content: '' })
 
-  const isFormValid = computed(() => {
-    if (form.content.trim().length < 2) return false
-    if (!authStore.isLoggedIn && !form.authorName.trim()) return false
-    return true
-  })
+  const isFormValid = computed(() => form.content.trim().length >= 2)
 
   async function submitComment() {
     if (!postId.value || !isFormValid.value) return
     submitting.value = true
 
     try {
-      const body: Record<string, string> = { content: form.content.trim() }
-      if (!authStore.isLoggedIn) {
-        body.authorName = form.authorName.trim()
-        if (form.authorEmail.trim()) body.authorEmail = form.authorEmail.trim()
-      }
-
-      const result = await repo.addComment(postId.value, body)
+      const result = await repo.addComment(postId.value, { content: form.content.trim() })
       if (result) {
         form.content = ''
-        form.authorName = ''
-        form.authorEmail = ''
         popup.success(t('comment.submitted'))
         await refresh()
       }
@@ -58,6 +41,6 @@ export function usePostCommentViewModel(postId: ComputedRef<number | undefined>)
   return {
     comments, loading, page, totalPages, total,
     form, isFormValid, submitting,
-    submitComment, authStore,
+    submitComment,
   }
 }

@@ -11,7 +11,7 @@ const postId = computed(() => props.post.id)
 const {
   comments, loading, page, totalPages, total,
   form, isFormValid, submitting,
-  submitComment, authStore,
+  submitComment,
 } = usePostCommentViewModel(postId)
 
 function getInitial(name: string) {
@@ -62,7 +62,7 @@ function formatDate(date: string) {
       >
         <!-- Avatar -->
         <v-avatar size="40" color="primary" class="flex-shrink-0 mt-0.5">
-          <v-img v-if="comment.user?.media" :src="comment.user.media" cover />
+          <v-img v-if="comment.authorAvatar" :src="comment.authorAvatar" cover />
           <span v-else class="text-white text-sm font-semibold">
             {{ getInitial(comment.authorName) }}
           </span>
@@ -105,41 +105,6 @@ function formatDate(date: string) {
       </div>
 
       <form v-else @submit.prevent="submitComment">
-        <!-- Guest fields -->
-        <template v-if="!authStore.isLoggedIn">
-          <v-row dense class="mb-1">
-            <v-col cols="12" sm="6">
-              <v-text-field
-                v-model="form.authorName"
-                :label="t('comment.name') + ' *'"
-                variant="outlined"
-                density="compact"
-                rounded="lg"
-                hide-details="auto"
-                maxlength="100"
-              />
-            </v-col>
-            <v-col cols="12" sm="6">
-              <v-text-field
-                v-model="form.authorEmail"
-                :label="t('comment.email')"
-                type="email"
-                variant="outlined"
-                density="compact"
-                rounded="lg"
-                hide-details="auto"
-              />
-            </v-col>
-          </v-row>
-        </template>
-
-        <!-- Logged in indicator -->
-        <div v-else class="flex items-center gap-2 mb-4 text-sm opacity-60">
-          <v-icon size="16">mdi-account-circle</v-icon>
-          <span>{{ t('comment.posting_as') }} <strong>{{ authStore.user?.name }}</strong></span>
-        </div>
-
-        <!-- Content -->
         <v-textarea
           v-model="form.content"
           :label="t('comment.content') + ' *'"
