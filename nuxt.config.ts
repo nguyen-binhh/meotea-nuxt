@@ -1,7 +1,15 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
+
+  routeRules: {
+    '/dang-nhap': { ssr: false },
+    '/dang-ky': { ssr: false },
+    '/dat-hang': { ssr: false },
+    '/ho-so': { ssr: false },
+    '/gio-hang': { ssr: false },
+  },
 
   devtools: { enabled: true },
 

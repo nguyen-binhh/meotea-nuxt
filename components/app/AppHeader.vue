@@ -100,79 +100,82 @@ const mobileMenuOpen = computed({
           </v-list>
         </v-menu>
 
-        <!-- User menu -->
-        <v-menu location="bottom end">
-          <template #activator="{ props: menuProps }">
-            <v-btn
-              v-if="!authStore.isLoggedIn"
-              v-bind="menuProps"
-              icon
-              variant="text"
-              size="small"
-              rounded="lg"
-            >
+        <!-- User menu (client-only: reads from localStorage) -->
+        <ClientOnly>
+          <v-menu location="bottom end">
+            <template #activator="{ props: menuProps }">
+              <v-btn
+                v-if="!authStore.isLoggedIn"
+                v-bind="menuProps"
+                icon
+                variant="text"
+                size="small"
+                rounded="lg"
+              >
+                <v-icon>mdi-account-outline</v-icon>
+              </v-btn>
+              <v-btn
+                v-else
+                v-bind="menuProps"
+                variant="text"
+                size="small"
+                rounded="lg"
+                min-width="0"
+                class="font-medium px-2"
+              >
+                <v-avatar v-if="authStore.user?.media" size="24" class="mr-1">
+                  <v-img :src="authStore.user.media" cover />
+                </v-avatar>
+                <v-icon v-else start size="18">mdi-account-circle</v-icon>
+                <span class="hidden sm:inline text-sm">{{ authStore.user?.name }}</span>
+              </v-btn>
+            </template>
+
+            <v-list density="compact" rounded="lg" min-width="180" class="py-1">
+              <template v-if="authStore.isLoggedIn">
+                <v-list-item rounded="lg" to="/ho-so" color="primary">
+                  <template #prepend>
+                    <v-avatar v-if="authStore.user?.media" size="32" class="mr-2">
+                      <v-img :src="authStore.user.media" cover />
+                    </v-avatar>
+                    <v-icon v-else size="32" class="mr-2">mdi-account-circle-outline</v-icon>
+                  </template>
+                  <v-list-item-title class="font-semibold text-sm">{{ authStore.user?.name }}</v-list-item-title>
+                  <v-list-item-subtitle class="text-xs">{{ authStore.user?.email }}</v-list-item-subtitle>
+                </v-list-item>
+                <v-divider class="my-1" />
+                <v-list-item
+                  :title="t('auth.logout')"
+                  prepend-icon="mdi-logout"
+                  rounded="lg"
+                  color="error"
+                  @click="authStore.logout()"
+                />
+              </template>
+              <template v-else>
+                <v-list-item
+                  :title="t('auth.login')"
+                  prepend-icon="mdi-login"
+                  rounded="lg"
+                  color="primary"
+                  to="/dang-nhap"
+                />
+                <v-list-item
+                  :title="t('auth.register')"
+                  prepend-icon="mdi-account-plus-outline"
+                  rounded="lg"
+                  color="primary"
+                  to="/dang-ky"
+                />
+              </template>
+            </v-list>
+          </v-menu>
+          <template #fallback>
+            <v-btn icon variant="text" size="small" rounded="lg">
               <v-icon>mdi-account-outline</v-icon>
             </v-btn>
-            <v-btn
-              v-else
-              v-bind="menuProps"
-              variant="text"
-              size="small"
-              rounded="lg"
-              min-width="0"
-              class="font-medium px-2"
-            >
-              <v-avatar v-if="authStore.user?.media" size="24" class="mr-1">
-                <v-img :src="authStore.user.media" cover />
-              </v-avatar>
-              <v-icon v-else start size="18">mdi-account-circle</v-icon>
-              <span class="hidden sm:inline text-sm">{{ authStore.user?.name }}</span>
-            </v-btn>
           </template>
-
-          <v-list density="compact" rounded="lg" min-width="180" class="py-1">
-            <template v-if="authStore.isLoggedIn">
-              <v-list-item
-                rounded="lg"
-                to="/ho-so"
-                color="primary"
-              >
-                <template #prepend>
-                  <v-avatar v-if="authStore.user?.media" size="32" class="mr-2">
-                    <v-img :src="authStore.user.media" cover />
-                  </v-avatar>
-                  <v-icon v-else size="32" class="mr-2">mdi-account-circle-outline</v-icon>
-                </template>
-                <v-list-item-title class="font-semibold text-sm">{{ authStore.user?.name }}</v-list-item-title>
-                <v-list-item-subtitle class="text-xs">{{ authStore.user?.email }}</v-list-item-subtitle>
-              </v-list-item>
-              <v-divider class="my-1" />
-              <v-list-item
-                :title="t('auth.logout')"
-                prepend-icon="mdi-logout"
-                rounded="lg"
-                color="error"
-                @click="authStore.logout()"
-              />
-            </template>
-            <template v-else>
-              <v-list-item
-                :title="t('auth.login')"
-                prepend-icon="mdi-login"
-                rounded="lg"
-                color="primary"
-                to="/dang-nhap"
-              />
-              <v-list-item
-                :title="t('auth.register')"
-                prepend-icon="mdi-account-plus-outline"
-                rounded="lg"
-                color="primary"
-                to="/dang-ky"
-              />
-            </template>
-          </v-list>
-        </v-menu>
+        </ClientOnly>
 
         <!-- Theme toggle -->
         <v-btn
@@ -183,23 +186,24 @@ const mobileMenuOpen = computed({
           @click="toggleTheme"
         />
 
-        <!-- Cart button -->
-        <v-btn
-          icon
-          variant="text"
-          size="small"
-          rounded="lg"
-          @click="ui.toggleCart"
-        >
-          <v-badge
-            :content="cartStore.itemCount"
-            :model-value="cartStore.itemCount > 0"
-            color="primary"
-            floating
-          >
-            <v-icon>mdi-cart-outline</v-icon>
-          </v-badge>
-        </v-btn>
+        <!-- Cart button (client-only: reads cart count from localStorage) -->
+        <ClientOnly>
+          <v-btn icon variant="text" size="small" rounded="lg" @click="ui.toggleCart">
+            <v-badge
+              :content="cartStore.itemCount"
+              :model-value="cartStore.itemCount > 0"
+              color="primary"
+              floating
+            >
+              <v-icon>mdi-cart-outline</v-icon>
+            </v-badge>
+          </v-btn>
+          <template #fallback>
+            <v-btn icon variant="text" size="small" rounded="lg">
+              <v-icon>mdi-cart-outline</v-icon>
+            </v-btn>
+          </template>
+        </ClientOnly>
 
         <!-- Mobile menu toggle -->
         <v-btn
