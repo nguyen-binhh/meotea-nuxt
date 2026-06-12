@@ -14,6 +14,8 @@ const {
   loading,
   activeCategory,
   searchQuery,
+  page,
+  totalPages,
   selectCategory,
 } = useProductListViewModel()
 
@@ -65,7 +67,7 @@ function quickAddToCart(product: Product) {
 
       <!-- Loading -->
       <v-row v-if="loading">
-        <v-col v-for="i in 8" :key="i" cols="12" sm="6" md="3">
+        <v-col v-for="i in 12" :key="i" cols="12" sm="6" md="3">
           <v-skeleton-loader type="card" rounded="xl" />
         </v-col>
       </v-row>
@@ -80,18 +82,31 @@ function quickAddToCart(product: Product) {
       </div>
 
       <!-- Products grid -->
-      <v-row v-else>
-        <v-col
-          v-for="product in products"
-          :key="product.id"
-          cols="12"
-          sm="6"
-          md="4"
-          lg="3"
-        >
-          <ProductCard :product="product" @add-to-cart="quickAddToCart" />
-        </v-col>
-      </v-row>
+      <template v-else>
+        <v-row>
+          <v-col
+            v-for="product in products"
+            :key="product.id"
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
+          >
+            <ProductCard :product="product" @add-to-cart="quickAddToCart" />
+          </v-col>
+        </v-row>
+
+        <div class="d-flex justify-center mt-8">
+          <v-pagination
+            v-if="totalPages > 1"
+            v-model="page"
+            :length="totalPages"
+            :total-visible="7"
+            rounded="lg"
+            active-color="primary"
+          />
+        </div>
+      </template>
     </v-container>
   </div>
 </template>

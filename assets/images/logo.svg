@@ -1,27 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none" role="img" aria-label="Mèo Trà logo">
-  <!-- Single-stroke cat outline: ears + head in one continuous path -->
-  <path d="M36,70 A28,28 0 0,1 52,25 L62,8 L68,28 A28,28 0 0,1 84,70 A28,28 0 0,1 36,70 Z"
-        stroke="#F48FB1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Left ear (single stroke) -->
-  <path d="M38,40 L30,14 L52,32"
-        stroke="#F48FB1" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Right ear (single stroke) -->
-  <path d="M68,32 L90,14 L82,40"
-        stroke="#F48FB1" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Eyes (happy squint) -->
-  <path d="M48,52 Q52,48 56,52" stroke="#F48FB1" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <path d="M64,52 Q68,48 72,52" stroke="#F48FB1" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <!-- Nose -->
-  <path d="M58,60 L60,63 L62,60" stroke="#F48FB1" stroke-width="2" stroke-linejoin="round" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 122" fill="none" role="img" aria-label="Mèo Trà logo">
+  <!-- Cat ears (bases computed to land on circle boundary) -->
+  <path d="M33,28 L24,10 L39,24"
+        stroke="#F48FB1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M61,24 L76,10 L67,28"
+        stroke="#F48FB1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Cat head -->
+  <circle cx="50" cy="40" r="19" stroke="#F48FB1" stroke-width="2.5"/>
+
+  <!-- Eyes (filled dots) -->
+  <circle cx="43" cy="37" r="2.5" fill="#F48FB1"/>
+  <circle cx="57" cy="37" r="2.5" fill="#F48FB1"/>
+
   <!-- Smile -->
-  <path d="M54,66 Q60,72 66,66" stroke="#F48FB1" stroke-width="2" fill="none" stroke-linecap="round"/>
-  <!-- Bubble tea cup (straw + cup body + bubbles) -->
-  <line x1="60" y1="80" x2="60" y2="74" stroke="#F48FB1" stroke-width="3" stroke-linecap="round"/>
-  <path d="M44,82 Q44,80 46,80 L74,80 Q76,80 76,82 L72,108 Q72,110 60,110 Q48,110 48,108 Z"
-        stroke="#F48FB1" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="44" y1="90" x2="76" y2="90" stroke="#F48FB1" stroke-width="2" stroke-linecap="round"/>
+  <path d="M43,46 Q50,53 57,46" stroke="#F48FB1" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+  <!-- Straw -->
+  <line x1="50" y1="59" x2="50" y2="68" stroke="#F48FB1" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Dome lid -->
+  <path d="M30,68 Q50,60 70,68" stroke="#F48FB1" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Cup body (narrows toward bottom → realistic boba cup shape) -->
+  <path d="M30,68 L34,108 Q34,112 50,112 Q66,112 66,108 L70,68"
+        stroke="#F48FB1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Fill line -->
+  <line x1="33" y1="81" x2="67" y2="81" stroke="#F48FB1" stroke-width="1.5" stroke-linecap="round"/>
+
   <!-- Boba pearls -->
-  <circle cx="53" cy="101" r="4" stroke="#F48FB1" stroke-width="2" fill="#FCE4EC"/>
-  <circle cx="60" cy="104" r="4" stroke="#F48FB1" stroke-width="2" fill="#FCE4EC"/>
-  <circle cx="67" cy="101" r="4" stroke="#F48FB1" stroke-width="2" fill="#FCE4EC"/>
+  <circle cx="42" cy="103" r="4" fill="#FCE4EC" stroke="#F48FB1" stroke-width="1.5"/>
+  <circle cx="50" cy="106" r="4" fill="#FCE4EC" stroke="#F48FB1" stroke-width="1.5"/>
+  <circle cx="58" cy="103" r="4" fill="#FCE4EC" stroke="#F48FB1" stroke-width="1.5"/>
 </svg>

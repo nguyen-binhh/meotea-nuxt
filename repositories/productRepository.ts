@@ -1,4 +1,4 @@
-import type { Product, ApiResponse } from '~/types'
+import type { Product, ApiResponse, PaginationMeta, Paginated } from '~/types'
 import { mockProducts } from '~/mock/products'
 import { buildCacheKey } from '~/utils/cacheConfig'
 
@@ -31,29 +31,50 @@ function mapProduct(p: any): Product {
   }
 }
 
+const defaultMeta: PaginationMeta = { page: 1, limit: 12, total: 0, totalPages: 1 }
+
+export interface ProductQueryParams {
+  page?: number
+  limit?: number
+  categorySlug?: string
+  search?: string
+}
+
 export function useProductRepository() {
   const { isMock } = useApiClient()
   const config = useRuntimeConfig()
   const baseUrl = config.public.apiUrl as string
 
-  function getProducts(params?: { categorySlug?: string; search?: string }) {
+  function getProducts(params: ComputedRef<ProductQueryParams>) {
     if (isMock) {
-      let result = [...mockProducts]
-      if (params?.categorySlug) {
-        result = result.filter(p => p.categorySlug === params.categorySlug)
+      const p = params.value
+      let items = [...mockProducts]
+      if (p.categorySlug) items = items.filter(x => x.categorySlug === p.categorySlug)
+      if (p.search) {
+        const q = p.search.toLowerCase()
+        items = items.filter(x => x.name.toLowerCase().includes(q))
       }
-      if (params?.search) {
-        const q = params.search.toLowerCase()
-        result = result.filter(p => p.name.toLowerCase().includes(q))
+      const page = p.page ?? 1
+      const limit = p.limit ?? 12
+      const total = items.length
+      const totalPages = Math.ceil(total / limit) || 1
+      const pageItems = items.slice((page - 1) * limit, page * limit)
+      return {
+        data: ref<Paginated<Product>>({ items: pageItems, meta: { page, limit, total, totalPages } }),
+        pending: ref(false),
+        error: ref(null),
+        refresh: async () => {},
       }
-      return { data: ref<Product[]>(result), pending: ref(false), error: ref(null), refresh: async () => {} }
     }
 
-    const key = buildCacheKey('/products', params ? JSON.stringify(params) : undefined) ?? `products-${Date.now()}`
     return useFetch(`${baseUrl}/products`, {
-      key,
+      key: 'products-list',
       params,
-      transform: (res: ApiResponse<any[]>) => res.data.map(mapProduct) as Product[],
+      watch: [params],
+      transform: (res: any): Paginated<Product> => ({
+        items: (res.data?.items ?? []).map(mapProduct),
+        meta: res.data?.meta ?? defaultMeta,
+      }),
     })
   }
 
@@ -79,8 +100,8 @@ export function useProductRepository() {
     const key = buildCacheKey('/products', 'featured') ?? 'products-featured'
     return useFetch(`${baseUrl}/products`, {
       key,
-      query: { featured: 'true' },
-      transform: (res: ApiResponse<any[]>) => res.data.map(mapProduct) as Product[],
+      query: { featured: 'true', limit: 6 },
+      transform: (res: any): Product[] => (res.data?.items ?? []).map(mapProduct),
     })
   }
 

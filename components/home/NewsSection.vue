@@ -5,7 +5,7 @@ const { posts, loading, formatDate } = usePostListViewModel()
 const sectionRef = ref<HTMLElement | null>(null)
 const { isVisible } = useScrollReveal(sectionRef)
 
-const latestPosts = computed(() => posts.value?.slice(0, 3) ?? [])
+const latestPosts = computed(() => posts.value.slice(0, 3))
 </script>
 
 <template>

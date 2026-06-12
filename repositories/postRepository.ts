@@ -1,17 +1,34 @@
-import type { Post } from '~/types'
+import type { Post, PaginationMeta, Paginated } from '~/types'
+
+const defaultMeta: PaginationMeta = { page: 1, limit: 9, total: 0, totalPages: 1 }
+
+export interface PostQueryParams {
+  page?: number
+  limit?: number
+}
 
 export function usePostRepository() {
   const { isMock } = useApiClient()
   const config = useRuntimeConfig()
   const baseUrl = config.public.apiUrl as string
 
-  function getPosts() {
+  function getPosts(params: ComputedRef<PostQueryParams>) {
     if (isMock) {
-      return { data: ref<Post[]>([]), pending: ref(false), error: ref(null), refresh: async () => {} }
+      return {
+        data: ref<Paginated<Post>>({ items: [], meta: defaultMeta }),
+        pending: ref(false),
+        error: ref(null),
+        refresh: async () => {},
+      }
     }
     return useFetch(`${baseUrl}/posts`, {
-      key: 'posts',
-      transform: (res: any): Post[] => res.data ?? [],
+      key: 'posts-list',
+      params,
+      watch: [params],
+      transform: (res: any): Paginated<Post> => ({
+        items: res.data?.items ?? [],
+        meta: res.data?.meta ?? defaultMeta,
+      }),
     })
   }
 

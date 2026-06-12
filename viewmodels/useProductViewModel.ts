@@ -1,42 +1,47 @@
 import type { Product, Category, ProductSize, ProductTopping } from '~/types'
+import type { ProductQueryParams } from '~/repositories/productRepository'
 
 export function useProductListViewModel() {
   const productRepo = useProductRepository()
   const categoryRepo = useCategoryRepository()
 
+  const page = ref(1)
+  const limit = ref(8)
   const activeCategory = ref<string>('all')
   const searchQuery = ref('')
 
-  const { data: allProducts, pending: loading, refresh: refreshProducts } = productRepo.getProducts()
+  const params = computed<ProductQueryParams>(() => ({
+    page: page.value,
+    limit: limit.value,
+    ...(activeCategory.value !== 'all' ? { categorySlug: activeCategory.value } : {}),
+    ...(searchQuery.value.trim() ? { search: searchQuery.value.trim() } : {}),
+  }))
+
+  const { data, pending: loading } = productRepo.getProducts(params)
   const { data: categories } = categoryRepo.getCategories()
 
-  const filteredProducts = computed<Product[]>(() => {
-    let list: Product[] = allProducts.value ?? []
-
-    if (activeCategory.value !== 'all') {
-      list = list.filter(p => p.categorySlug === activeCategory.value)
-    }
-
-    if (searchQuery.value.trim()) {
-      const q = searchQuery.value.toLowerCase()
-      list = list.filter(p => p.name.toLowerCase().includes(q))
-    }
-
-    return list
-  })
+  const products = computed<Product[]>(() => data.value?.items ?? [])
+  const totalPages = computed(() => data.value?.meta?.totalPages ?? 1)
+  const totalItems = computed(() => data.value?.meta?.total ?? 0)
 
   function selectCategory(slug: string) {
     activeCategory.value = slug
+    page.value = 1
   }
 
+  watch(searchQuery, () => { page.value = 1 })
+
   return {
-    products: filteredProducts,
+    products,
     categories: categories as Ref<Category[]>,
     loading,
     activeCategory,
     searchQuery,
+    page,
+    limit,
+    totalPages,
+    totalItems,
     selectCategory,
-    refreshProducts,
   }
 }
 

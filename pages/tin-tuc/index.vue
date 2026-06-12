@@ -2,7 +2,7 @@
 definePageMeta({ layout: 'default' })
 
 const { t } = useI18n()
-const { posts, featuredPost, otherPosts, loading, formatDate } = usePostListViewModel()
+const { posts, loading, page, totalPages, formatDate } = usePostListViewModel()
 
 useSeoMeta({
   title: () => t('post.seo_title'),
@@ -24,78 +24,23 @@ useSeoMeta({
 
     <v-container class="py-8">
       <!-- Loading -->
-      <template v-if="loading">
-        <v-skeleton-loader type="card" rounded="xl" class="mb-8" height="300" />
-        <v-row>
-          <v-col v-for="i in 3" :key="i" cols="12" sm="6" md="4">
-            <v-skeleton-loader type="card" rounded="xl" />
-          </v-col>
-        </v-row>
-      </template>
+      <v-row v-if="loading">
+        <v-col v-for="i in 9" :key="i" cols="12" sm="6" md="4">
+          <v-skeleton-loader type="card" rounded="xl" />
+        </v-col>
+      </v-row>
 
       <!-- Empty -->
-      <div v-else-if="!posts?.length" class="text-center py-20 opacity-50">
+      <div v-else-if="!posts.length" class="text-center py-20 opacity-50">
         <v-icon size="64" class="mb-4">mdi-newspaper-variant-outline</v-icon>
         <p>{{ t('post.no_posts') }}</p>
       </div>
 
-      <!-- Content -->
+      <!-- Posts grid + pagination -->
       <template v-else>
-        <!-- Featured post -->
-        <NuxtLink
-          v-if="featuredPost"
-          :to="`/tin-tuc/${featuredPost.slug}`"
-          class="no-underline block"
-        >
-          <v-card
-            rounded="xl"
-            :elevation="0"
-            class="border border-pink-100 overflow-hidden mb-8 hover:shadow-lg transition-shadow duration-300"
-          >
-            <v-row no-gutters>
-              <v-col cols="12" md="6">
-                <v-img
-                  :src="featuredPost.image || ''"
-                  height="340"
-                  cover
-                  class="h-full"
-                >
-                  <template #placeholder>
-                    <div class="w-full h-full bg-pink-50 flex items-center justify-center">
-                      <v-icon size="64" color="primary" class="opacity-20">mdi-newspaper-variant-outline</v-icon>
-                    </div>
-                  </template>
-                </v-img>
-              </v-col>
-              <v-col cols="12" md="6" class="pa-6 pa-md-10 d-flex flex-column justify-center">
-                <v-chip color="primary" size="small" class="mb-4 w-fit">
-                  {{ t('post.latest') }}
-                </v-chip>
-                <h2 class="text-2xl font-bold mb-3 leading-tight">
-                  {{ featuredPost.title }}
-                </h2>
-                <p v-if="featuredPost.subtitle" class="opacity-60 mb-5 line-clamp-3 text-sm leading-relaxed">
-                  {{ featuredPost.subtitle }}
-                </p>
-                <div class="flex items-center gap-2 text-sm opacity-50 mb-6">
-                  <v-icon size="14">mdi-calendar-outline</v-icon>
-                  <span>{{ formatDate(featuredPost.createdAt) }}</span>
-                </div>
-                <div>
-                  <v-btn color="primary" rounded="lg" size="small" variant="elevated">
-                    {{ t('post.read_more') }}
-                    <v-icon end size="16">mdi-arrow-right</v-icon>
-                  </v-btn>
-                </div>
-              </v-col>
-            </v-row>
-          </v-card>
-        </NuxtLink>
-
-        <!-- Other posts grid -->
-        <v-row v-if="otherPosts.length">
+        <v-row>
           <v-col
-            v-for="post in otherPosts"
+            v-for="post in posts"
             :key="post.id"
             cols="12"
             sm="6"
@@ -134,6 +79,17 @@ useSeoMeta({
             </NuxtLink>
           </v-col>
         </v-row>
+
+        <div class="d-flex justify-center mt-8">
+          <v-pagination
+            v-if="totalPages > 1"
+            v-model="page"
+            :length="totalPages"
+            :total-visible="7"
+            rounded="lg"
+            active-color="primary"
+          />
+        </div>
       </template>
     </v-container>
   </div>
