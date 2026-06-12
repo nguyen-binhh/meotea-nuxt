@@ -5,6 +5,7 @@ const defaultMeta: PaginationMeta = { page: 1, limit: 9, total: 0, totalPages: 1
 export interface PostQueryParams {
   page?: number
   limit?: number
+  categorySlug?: string
 }
 
 export function usePostRepository() {

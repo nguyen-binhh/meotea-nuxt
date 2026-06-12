@@ -11,19 +11,31 @@ function formatDate(date: string) {
 
 export function usePostListViewModel() {
   const repo = usePostRepository()
+  const categoryRepo = usePostCategoryRepository()
 
   const page = ref(1)
   const limit = ref(6)
+  const activeCategory = ref<string>('all')
 
-  const params = computed<PostQueryParams>(() => ({ page: page.value, limit: limit.value }))
+  const params = computed<PostQueryParams>(() => ({
+    page: page.value,
+    limit: limit.value,
+    ...(activeCategory.value !== 'all' ? { categorySlug: activeCategory.value } : {}),
+  }))
 
   const { data, pending: loading } = repo.getPosts(params)
+  const { data: postCategories } = categoryRepo.getCategories()
 
   const posts = computed<Post[]>(() => data.value?.items ?? [])
   const totalPages = computed(() => data.value?.meta?.totalPages ?? 1)
   const totalItems = computed(() => data.value?.meta?.total ?? 0)
 
-  return { posts, loading, page, limit, totalPages, totalItems, formatDate }
+  function selectCategory(slug: string) {
+    activeCategory.value = slug
+    page.value = 1
+  }
+
+  return { posts, loading, postCategories, page, limit, totalPages, totalItems, activeCategory, selectCategory, formatDate }
 }
 
 export function usePostDetailViewModel(slug: string) {
@@ -31,11 +43,16 @@ export function usePostDetailViewModel(slug: string) {
   const { data: post, pending: loading, error } = repo.getPostBySlug(slug)
   const limit = ref(6)
 
-  const detailParams = computed<PostQueryParams>(() => ({ page: 1, limit: limit.value }))
-  const { data: pagedPosts } = repo.getPosts(detailParams)
+  const relatedParams = computed<PostQueryParams>(() => ({
+    page: 1,
+    limit: limit.value,
+    ...(post.value?.category?.slug ? { categorySlug: post.value.category.slug } : {}),
+  }))
+
+  const { data: pagedPosts } = repo.getPosts(relatedParams)
 
   const relatedPosts = computed<Post[]>(() =>
-    ((pagedPosts.value?.items as Post[] | null) ?? []).filter((p: Post) => p.slug !== slug).slice(0, 3),
+    (pagedPosts.value?.items ?? []).filter((p: Post) => p.slug !== slug).slice(0, 3),
   )
 
   return { post, loading, error, limit, relatedPosts, formatDate }

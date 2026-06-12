@@ -59,9 +59,20 @@ useSeoMeta({
           {{ post.subtitle }}
         </p>
 
-        <div class="flex items-center gap-2 text-sm opacity-50 mb-8">
-          <v-icon size="15">mdi-calendar-outline</v-icon>
-          <span>{{ t('post.published') }}: {{ formatDate(post.createdAt) }}</span>
+        <div class="flex items-center flex-wrap gap-3 mb-8">
+          <NuxtLink
+            v-if="post.category"
+            :to="{ path: '/tin-tuc', query: { category: post.category.slug } }"
+            class="no-underline"
+          >
+            <v-chip color="primary" variant="tonal" size="small" rounded="sm" class="cursor-pointer">
+              {{ post.category.name }}
+            </v-chip>
+          </NuxtLink>
+          <div class="flex items-center gap-1 text-sm opacity-50">
+            <v-icon size="15">mdi-calendar-outline</v-icon>
+            <span>{{ t('post.published') }}: {{ formatDate(post.createdAt) }}</span>
+          </div>
         </div>
 
         <v-img
@@ -91,7 +102,12 @@ useSeoMeta({
 
       <!-- Related posts -->
       <section v-if="!loading && relatedPosts.length" class="mt-12">
-        <h2 class="text-xl font-bold mb-6">{{ t('post.related') }}</h2>
+        <h2 class="text-xl font-bold mb-6">
+          {{ t('post.related') }}
+          <span v-if="post?.category" class="text-primary font-normal text-base ml-2 opacity-70">
+            — {{ post.category.name }}
+          </span>
+        </h2>
         <v-row>
           <v-col
             v-for="p in relatedPosts"

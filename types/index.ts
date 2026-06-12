@@ -97,6 +97,18 @@ export interface Partner {
   url?: string
 }
 
+// ─── PostCategory ─────────────────────────────────────────────────
+export interface PostCategory {
+  id: number
+  name: string
+  slug: string
+  description?: string
+  isActive: boolean
+  sortOrder: number
+  createdAt: string
+  updatedAt: string
+}
+
 // ─── Post ─────────────────────────────────────────────────────────
 export interface Post {
   id: number
@@ -105,6 +117,8 @@ export interface Post {
   content: string
   image?: string
   slug: string
+  categoryId?: number
+  category?: PostCategory | null
   isActive: boolean
   createdAt: string
   updatedAt: string
