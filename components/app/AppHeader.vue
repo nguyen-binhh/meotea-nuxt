@@ -15,6 +15,7 @@ const navItems = computed(() => [
   { label: t('nav.brand'),    to: '/thuong-hieu' },
   { label: t('nav.about'),    to: '/gioi-thieu' },
   { label: t('nav.partners'), to: '/doi-tac' },
+  { label: t('nav.news'),    to: '/tin-tuc' },
 ])
 
 const langOptions = computed(() =>

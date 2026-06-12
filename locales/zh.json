@@ -9,7 +9,8 @@
     "cart": "购物车",
     "order": "下单",
     "checkout": "结账",
-    "product_detail": "产品详情"
+    "product_detail": "产品详情",
+    "news": "新闻"
   },
   "home": {
     "featured_label": "热门推荐",
@@ -34,6 +35,10 @@
     "hero2_desc": "Mèo Trà专属限定饮品。神秘风味，独特体验。",
     "hero2_cta": "立即查看",
     "about_us": "关于我们",
+    "news_label": "新闻",
+    "news_title": "最新新闻",
+    "news_desc": "来自Mèo Trà的最新资讯和故事",
+    "see_all_news": "查看全部新闻",
     "slide_prev": "上一张",
     "slide_next": "下一张",
     "review1_name": "阮氏梅",
@@ -261,5 +266,17 @@
     "loading": "加载中...",
     "error": "发生错误",
     "success": "成功"
+  },
+  "post": {
+    "news": "新闻",
+    "seo_title": "新闻 – Mèo Trà",
+    "seo_desc": "Mèo Trà最新新闻和动态",
+    "no_posts": "暂无文章",
+    "not_found": "文章不存在",
+    "read_more": "阅读更多",
+    "back": "返回新闻",
+    "related": "相关文章",
+    "latest": "最新",
+    "published": "发布于"
   }
 }

@@ -8,6 +8,7 @@ export interface BreadcrumbItem {
 const PATH_LABELS: Record<string, string> = {
   'thuc-don':   'nav.menu',
   'san-pham':   'nav.product_detail',
+  'tin-tuc':    'post.news',
   'gio-hang':   'nav.cart',
   'dat-hang':   'nav.order',
   'thanh-toan': 'nav.checkout',

@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\USER\\\\Desktop\\\\project\\\\meotea-nuxt\" -Recurse -Exclude \"node_modules\" -Name)",
-      "Bash(Select-Object -First 200)"
+      "Bash(Select-Object -First 200)",
+      "Bash(pnpm check:type)"
     ],
     "additionalDirectories": [
       "c:\\Users\\USER\\Desktop\\project\\meotea-api\\src\\database\\seeds",

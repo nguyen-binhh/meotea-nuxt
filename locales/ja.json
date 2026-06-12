@@ -9,7 +9,8 @@
     "cart": "カート",
     "order": "注文",
     "checkout": "チェックアウト",
-    "product_detail": "商品詳細"
+    "product_detail": "商品詳細",
+    "news": "ニュース"
   },
   "home": {
     "featured_label": "人気商品",
@@ -34,6 +35,10 @@
     "hero2_desc": "Mèo Tràだけの限定ドリンク。秘密のフレーバー、特別な体験。",
     "hero2_cta": "今すぐ見る",
     "about_us": "私たちについて",
+    "news_label": "ニュース",
+    "news_title": "最新ニュース",
+    "news_desc": "Mèo Tràからの最新情報とストーリー",
+    "see_all_news": "ニュースをすべて見る",
     "slide_prev": "前のスライド",
     "slide_next": "次のスライド",
     "review1_name": "マイ・グエン",
@@ -261,5 +266,17 @@
     "loading": "読み込み中...",
     "error": "エラーが発生しました",
     "success": "成功"
+  },
+  "post": {
+    "news": "ニュース",
+    "seo_title": "ニュース – Mèo Trà",
+    "seo_desc": "Mèo Tràからの最新ニュースと更新情報",
+    "no_posts": "まだ記事がありません",
+    "not_found": "記事が見つかりません",
+    "read_more": "続きを読む",
+    "back": "ニュースに戻る",
+    "related": "関連記事",
+    "latest": "最新",
+    "published": "公開日"
   }
 }

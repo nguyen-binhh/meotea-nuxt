@@ -16,6 +16,7 @@ useSeoMeta({
     <HeroBanner />
     <FeaturedProducts />
     <BrandTeaser />
+    <NewsSection />
     <TestimonialSection />
   </main>
 </template>

@@ -25,7 +25,7 @@ export function useApiClient() {
     }
   }
 
-  async function post<T>(path: string, body: unknown): Promise<T | null> {
+  async function post<T>(path: string, body: Record<string, unknown> | BodyInit | null): Promise<T | null> {
     if (isMock) return null
 
     try {
@@ -41,7 +41,7 @@ export function useApiClient() {
     }
   }
 
-  async function put<T>(path: string, body: unknown): Promise<T | null> {
+  async function put<T>(path: string, body: Record<string, unknown> | BodyInit | null): Promise<T | null> {
     if (isMock) return null
 
     try {
@@ -57,7 +57,7 @@ export function useApiClient() {
     }
   }
 
-  async function patch<T>(path: string, body: unknown): Promise<T | null> {
+  async function patch<T>(path: string, body: Record<string, unknown> | BodyInit | null): Promise<T | null> {
     if (isMock) return null
 
     try {

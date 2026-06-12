@@ -1,6 +1,9 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'default' })
 
+const { requireGuest } = useAuthGuard()
+await requireGuest()
+
 const { t } = useI18n()
 const { form, loading, error, showPassword, register } = useRegisterViewModel()
 

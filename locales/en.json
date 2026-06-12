@@ -9,7 +9,8 @@
     "cart": "Cart",
     "order": "Order",
     "checkout": "Checkout",
-    "product_detail": "Product Detail"
+    "product_detail": "Product Detail",
+    "news": "News"
   },
   "home": {
     "featured_label": "Most Loved",
@@ -34,6 +35,10 @@
     "hero2_desc": "Exclusive drinks only at Mèo Trà. Secret flavors, unique experience.",
     "hero2_cta": "View Now",
     "about_us": "About Us",
+    "news_label": "Latest News",
+    "news_title": "From Our Blog",
+    "news_desc": "Stay updated with the latest news and stories from Mèo Trà",
+    "see_all_news": "View All News",
     "slide_prev": "Previous slide",
     "slide_next": "Next slide",
     "review1_name": "Mai Nguyen",
@@ -261,5 +266,17 @@
     "loading": "Loading...",
     "error": "An error occurred",
     "success": "Success"
+  },
+  "post": {
+    "news": "News",
+    "seo_title": "News – Mèo Trà",
+    "seo_desc": "Latest news and updates from Mèo Trà",
+    "no_posts": "No posts yet",
+    "not_found": "Post not found",
+    "read_more": "Read More",
+    "back": "Back to News",
+    "related": "Related Articles",
+    "latest": "Latest",
+    "published": "Published on"
   }
 }

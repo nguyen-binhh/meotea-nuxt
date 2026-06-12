@@ -1,10 +1,8 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'default' })
 
-const authStore = useAuthStore()
-if (!authStore.isLoggedIn) {
-  await navigateTo('/dang-nhap')
-}
+const { requireAuth } = useAuthGuard()
+await requireAuth()
 
 const { t } = useI18n()
 const { customer, paymentMethod, total, loading, placeOrder, items, subtotal } = useOrderViewModel()

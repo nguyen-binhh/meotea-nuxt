@@ -97,6 +97,19 @@ export interface Partner {
   url?: string
 }
 
+// ─── Post ─────────────────────────────────────────────────────────
+export interface Post {
+  id: number
+  title: string
+  subtitle?: string
+  content: string
+  image?: string
+  slug: string
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+}
+
 // ─── API Response ─────────────────────────────────────────────────
 export interface ApiResponse<T> {
   data: T

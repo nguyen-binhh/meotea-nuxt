@@ -9,7 +9,8 @@
     "cart": "Giỏ hàng",
     "order": "Đặt hàng",
     "checkout": "Thanh toán",
-    "product_detail": "Chi tiết sản phẩm"
+    "product_detail": "Chi tiết sản phẩm",
+    "news": "Tin tức"
   },
   "home": {
     "featured_label": "Được yêu thích",
@@ -34,6 +35,10 @@
     "hero2_desc": "Thức uống độc quyền chỉ có tại Mèo Trà. Hương vị bí mật, trải nghiệm khác biệt.",
     "hero2_cta": "Xem ngay",
     "about_us": "Về chúng tôi",
+    "news_label": "Tin tức",
+    "news_title": "Tin tức mới nhất",
+    "news_desc": "Cập nhật những thông tin và chia sẻ mới nhất từ Mèo Trà",
+    "see_all_news": "Xem tất cả tin tức",
     "slide_prev": "Slide trước",
     "slide_next": "Slide tiếp theo",
     "review1_name": "Nguyễn Thị Mai",
@@ -261,5 +266,17 @@
     "loading": "Đang tải...",
     "error": "Có lỗi xảy ra",
     "success": "Thành công"
+  },
+  "post": {
+    "news": "Tin tức",
+    "seo_title": "Tin tức – Mèo Trà",
+    "seo_desc": "Cập nhật tin tức và chia sẻ mới nhất từ Mèo Trà",
+    "no_posts": "Chưa có bài viết nào",
+    "not_found": "Bài viết không tồn tại",
+    "read_more": "Đọc thêm",
+    "back": "Quay lại tin tức",
+    "related": "Bài viết liên quan",
+    "latest": "Mới nhất",
+    "published": "Đăng ngày"
   }
 }
