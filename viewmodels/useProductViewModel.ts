@@ -9,12 +9,13 @@ export function useProductListViewModel() {
   const limit = ref(8)
   const activeCategory = ref<string>('all')
   const searchQuery = ref('')
+  const debouncedSearch = refDebounced(searchQuery, 400)
 
   const params = computed<ProductQueryParams>(() => ({
     page: page.value,
     limit: limit.value,
     ...(activeCategory.value !== 'all' ? { categorySlug: activeCategory.value } : {}),
-    ...(searchQuery.value.trim() ? { search: searchQuery.value.trim() } : {}),
+    ...(debouncedSearch.value.trim() ? { search: debouncedSearch.value.trim() } : {}),
   }))
 
   const { data, pending: loading } = productRepo.getProducts(params)
@@ -29,7 +30,7 @@ export function useProductListViewModel() {
     page.value = 1
   }
 
-  watch(searchQuery, () => { page.value = 1 })
+  watch(debouncedSearch, () => { page.value = 1 })
 
   return {
     products,
