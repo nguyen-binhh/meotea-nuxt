@@ -1,0 +1,47 @@
+{
+  "name": "meotea-nuxt",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "@nuxtjs/i18n": "8.3.1",
+    "@pinia/nuxt": "^0.5.1",
+    "@vueuse/core": "^10.9.0",
+    "@vueuse/nuxt": "^10.9.0",
+    "dayjs": "^1.11.10",
+    "nuxt": "3.11.2",
+    "pinia": "^2.1.7",
+    "vite-plugin-vuetify": "^2.0.3",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0",
+    "vuetify": "^3.5.13"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "^1.0.0",
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "sass": "^1.72.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.4.3",
+    "vue-tsc": "^2.0.6"
+  },
+  "pnpm": {
+    "overrides": {
+      "vue": "3.5.35",
+      "@vue/compiler-sfc": "3.5.35",
+      "@vue/shared": "3.5.35",
+      "@vue/compiler-core": "3.5.35",
+      "@vue/compiler-dom": "3.5.35",
+      "@vue/runtime-core": "3.5.35",
+      "@vue/runtime-dom": "3.5.35",
+      "@vue/reactivity": "3.5.35",
+      "@vue/server-renderer": "3.5.35"
+    }
+  }
+}

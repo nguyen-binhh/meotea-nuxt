@@ -1,0 +1,65 @@
+// ─── Brand Colors ────────────────────────────────────────────────
+$color-primary:          #F48FB1;
+$color-primary-dark:     #EC407A;
+$color-secondary:        #F8BBD0;
+$color-accent:           #FF80AB;
+
+// ─── Neutrals ────────────────────────────────────────────────────
+$color-white:            #FFFFFF;
+$color-surface-light:    #FFF5F8;
+$color-surface-pink:     #FCE4EC;
+$color-text-primary:     #212121;
+$color-text-secondary:   #757575;
+$color-border:           #F8BBD0;
+
+// ─── Dark Theme ──────────────────────────────────────────────────
+$color-bg-dark:          #1A1A2E;
+$color-surface-dark:     #16213E;
+$color-surface-dark-2:   #1E2D4F;
+
+// ─── Typography ──────────────────────────────────────────────────
+$font-family-base:       'Nunito', 'Be Vietnam Pro', sans-serif;
+$font-size-base:         16px;
+$font-size-sm:           14px;
+$font-size-xs:           12px;
+$font-size-lg:           18px;
+$font-size-xl:           24px;
+$font-size-2xl:          32px;
+$font-size-3xl:          40px;
+$font-weight-regular:    400;
+$font-weight-medium:     500;
+$font-weight-semibold:   600;
+$font-weight-bold:       700;
+
+// ─── Spacing ─────────────────────────────────────────────────────
+$spacing-xs:  4px;
+$spacing-sm:  8px;
+$spacing-md:  16px;
+$spacing-lg:  24px;
+$spacing-xl:  32px;
+$spacing-2xl: 48px;
+$spacing-3xl: 64px;
+
+// ─── Border Radius ───────────────────────────────────────────────
+$radius-sm:   8px;
+$radius-md:   12px;
+$radius-lg:   16px;
+$radius-xl:   24px;
+$radius-full: 9999px;
+
+// ─── Shadows ─────────────────────────────────────────────────────
+$shadow-sm:   0 2px 8px rgba(244, 143, 177, 0.15);
+$shadow-md:   0 4px 20px rgba(244, 143, 177, 0.2);
+$shadow-lg:   0 8px 40px rgba(244, 143, 177, 0.25);
+$shadow-card: 0 2px 16px rgba(0, 0, 0, 0.08);
+
+// ─── Transitions ─────────────────────────────────────────────────
+$transition-fast:   0.15s ease;
+$transition-base:   0.25s ease;
+$transition-slow:   0.4s ease;
+
+// ─── Z-index ─────────────────────────────────────────────────────
+$z-header:  100;
+$z-drawer:  200;
+$z-popup:   300;
+$z-toast:   400;
