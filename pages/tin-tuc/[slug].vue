@@ -100,6 +100,9 @@ useSeoMeta({
         </div>
       </article>
 
+      <!-- Comments -->
+      <PostComments v-if="post" :post="post" />
+
       <!-- Related posts -->
       <section v-if="!loading && relatedPosts.length" class="mt-12">
         <h2 class="text-xl font-bold mb-6">
@@ -122,13 +125,12 @@ useSeoMeta({
                 :elevation="0"
                 class="border border-pink-100 overflow-hidden h-full hover:shadow-md transition-shadow duration-300"
               >
-                <v-img :src="p.image || ''" height="160" cover>
-                  <template #placeholder>
-                    <div class="w-full h-full bg-pink-50 flex items-center justify-center">
-                      <v-icon size="32" color="primary" class="opacity-20">mdi-newspaper-variant-outline</v-icon>
-                    </div>
-                  </template>
-                </v-img>
+                <v-img
+                  :src="p.image || ''"
+                  height="160"
+                  cover
+                  class="bg-pink-50"
+                />
                 <v-card-text class="pa-4">
                   <div class="text-xs opacity-50 mb-2">{{ formatDate(p.createdAt) }}</div>
                   <h3 class="font-semibold text-sm line-clamp-2 leading-snug">{{ p.title }}</h3>

@@ -49,7 +49,7 @@ export function usePostDetailViewModel(slug: string) {
     ...(post.value?.category?.slug ? { categorySlug: post.value.category.slug } : {}),
   }))
 
-  const { data: pagedPosts } = repo.getPosts(relatedParams)
+  const { data: pagedPosts } = repo.getPosts(relatedParams, 'posts-related')
 
   const relatedPosts = computed<Post[]>(() =>
     (pagedPosts.value?.items ?? []).filter((p: Post) => p.slug !== slug).slice(0, 3),

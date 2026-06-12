@@ -279,5 +279,17 @@
     "latest": "最新",
     "published": "发布于",
     "all_categories": "全部"
+  },
+  "comment": {
+    "title": "评论",
+    "empty": "还没有评论，来第一个留言吧！",
+    "leave_comment": "留下评论",
+    "name": "姓名",
+    "email": "邮箱（可选）",
+    "content": "内容",
+    "submit": "发表评论",
+    "submitted": "您的评论已成功发送！",
+    "posting_as": "正在以以下身份评论",
+    "loading_form": "加载中..."
   }
 }

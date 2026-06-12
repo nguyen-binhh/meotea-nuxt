@@ -124,6 +124,20 @@ export interface Post {
   updatedAt: string
 }
 
+// ─── Comment ──────────────────────────────────────────────────────
+export interface Comment {
+  id: number
+  postId: number
+  userId?: number | null
+  user?: { name: string; email: string; media?: string } | null
+  authorName: string
+  authorEmail?: string | null
+  content: string
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+}
+
 // ─── API Response ─────────────────────────────────────────────────
 export interface ApiResponse<T> {
   data: T

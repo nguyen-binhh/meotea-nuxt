@@ -279,5 +279,17 @@
     "latest": "Latest",
     "published": "Published on",
     "all_categories": "All"
+  },
+  "comment": {
+    "title": "Comments",
+    "empty": "No comments yet. Be the first!",
+    "leave_comment": "Leave a comment",
+    "name": "Full name",
+    "email": "Email (optional)",
+    "content": "Content",
+    "submit": "Post comment",
+    "submitted": "Your comment has been posted!",
+    "posting_as": "Commenting as",
+    "loading_form": "Loading..."
   }
 }

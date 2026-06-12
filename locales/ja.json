@@ -279,5 +279,17 @@
     "latest": "最新",
     "published": "公開日",
     "all_categories": "すべて"
+  },
+  "comment": {
+    "title": "コメント",
+    "empty": "まだコメントがありません。最初のコメントを書いてみましょう！",
+    "leave_comment": "コメントを残す",
+    "name": "お名前",
+    "email": "メール（任意）",
+    "content": "内容",
+    "submit": "送信",
+    "submitted": "コメントを投稿しました！",
+    "posting_as": "コメント投稿者",
+    "loading_form": "読み込み中..."
   }
 }

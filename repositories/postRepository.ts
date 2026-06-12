@@ -13,7 +13,7 @@ export function usePostRepository() {
   const config = useRuntimeConfig()
   const baseUrl = config.public.apiUrl as string
 
-  function getPosts(params: ComputedRef<PostQueryParams>) {
+  function getPosts(params: ComputedRef<PostQueryParams>, fetchKey = 'posts-list') {
     if (isMock) {
       return {
         data: ref<Paginated<Post>>({ items: [], meta: defaultMeta }),
@@ -23,7 +23,7 @@ export function usePostRepository() {
       }
     }
     return useFetch(`${baseUrl}/posts`, {
-      key: 'posts-list',
+      key: fetchKey,
       params,
       watch: [params],
       transform: (res: any): Paginated<Post> => ({

@@ -279,5 +279,17 @@
     "latest": "Mới nhất",
     "published": "Đăng ngày",
     "all_categories": "Tất cả"
+  },
+  "comment": {
+    "title": "Bình luận",
+    "empty": "Chưa có bình luận nào. Hãy là người đầu tiên!",
+    "leave_comment": "Để lại bình luận",
+    "name": "Họ tên",
+    "email": "Email (không bắt buộc)",
+    "content": "Nội dung",
+    "submit": "Gửi bình luận",
+    "submitted": "Bình luận của bạn đã được gửi!",
+    "posting_as": "Đang bình luận với tên",
+    "loading_form": "Đang tải..."
   }
 }
