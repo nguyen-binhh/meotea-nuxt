@@ -4,9 +4,10 @@ import type { Product } from '~/types'
 definePageMeta({ layout: 'default' })
 
 const { t } = useI18n()
+const route = useRoute()
+const router = useRouter()
 const cartStore = useCartStore()
 const popup = usePopup()
-const router = useRouter()
 
 const {
   products,
@@ -18,6 +19,16 @@ const {
   totalPages,
   selectCategory,
 } = useProductListViewModel()
+
+onMounted(() => {
+  const cat = route.query.category as string | undefined
+  if (cat) selectCategory(cat)
+})
+
+function handleSelectCategory(slug: string) {
+  selectCategory(slug)
+  router.replace({ query: slug !== 'all' ? { category: slug } : {} })
+}
 
 function quickAddToCart(product: Product) {
   const defaultSize = product.sizes[0]
@@ -61,7 +72,7 @@ function quickAddToCart(product: Product) {
         :categories="categories ?? []"
         :active-category="activeCategory"
         :search-query="searchQuery"
-        @update:active-category="selectCategory"
+        @update:active-category="handleSelectCategory"
         @update:search-query="searchQuery = $event"
       />
 
